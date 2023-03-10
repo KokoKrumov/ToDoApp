@@ -17,12 +17,13 @@ import { useState } from "react";
 import styles from "./AddNewTodoModal.module.css";
 import { AddNewTodoModalProps } from "../../types/modal.type";
 import { ItemProps } from "../../types/todoItems.type";
+import { DEFAULT_PRIMARY_COLOR } from "../../shared/constants";
 
 const AddNewTodoModal = ({ open, handleClose }: AddNewTodoModalProps) => {
   const todoItemInit = {
     description: "",
     isChecked: false,
-    color: "#1976d2",
+    color: DEFAULT_PRIMARY_COLOR,
   };
   const [todoItem, setTodoItem] = useState<ItemProps>(todoItemInit);
   const [isNotTodoItemValid, setIsNotTodoItemValid] = useState<boolean>();
@@ -110,11 +111,7 @@ const AddNewTodoModal = ({ open, handleClose }: AddNewTodoModalProps) => {
               const { color, name } = colorObj;
               return (
                 <Grid item key={name + index}>
-                  <ColoredCard
-                    name={name}
-                    color={color}
-                    onClick={handleTodoColor}
-                  />
+                  <ColoredCard color={color} onClick={handleTodoColor} />
                 </Grid>
               );
             })}

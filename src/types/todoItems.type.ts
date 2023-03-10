@@ -9,6 +9,7 @@ export interface InitialStateProps {
   items: ItemProps[];
   allItemsAreChecked: boolean;
   filtrateBy: string;
+  colorPalette: string[];
 }
 
 export interface TodoItemsSelector {

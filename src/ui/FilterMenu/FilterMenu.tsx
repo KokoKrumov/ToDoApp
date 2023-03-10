@@ -1,5 +1,4 @@
-import { useState } from "react";
-import Button from "@mui/material/Button";
+import { useEffect, useState } from "react";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import FilterListIcon from "@mui/icons-material/FilterList";
@@ -9,17 +8,24 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid";
 import styles from "./FilterMenu.module.css";
 import ColoredCard from "./../ColoredCard/ColoredCard";
-import useGetColors from "../../hooks/useGetColors";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { todoItemsActions } from "../../store/todoItemsSlice";
 import { RESOLVED, UNRESOLVED, ALL } from "../../shared/constants";
+import { ItemProps, TodoItemsSelector } from "../../types/todoItems.type";
 
 const FilterMenu = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const { coloredButton, menuItemFixWidth } = styles;
+  const { menuItemFixWidth } = styles;
   const open = Boolean(anchorEl);
-  const colors = useGetColors();
   const dispatch = useDispatch();
+
+  const items: ItemProps[] = useSelector((state: TodoItemsSelector) => {
+    return state.todoItems.items;
+  });
+
+  const colors: string[] = useSelector((state: TodoItemsSelector) => {
+    return state.todoItems.colorPalette;
+  });
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -32,6 +38,10 @@ const FilterMenu = () => {
   const handleFilterTodoItems = (filter: string) => {
     dispatch(todoItemsActions.filtrateTodoItems(filter));
   };
+
+  useEffect(() => {
+    dispatch(todoItemsActions.updateColorFilter());
+  }, [items]);
 
   return (
     <div>
@@ -70,12 +80,10 @@ const FilterMenu = () => {
             </Grid>
             <Grid item container spacing={2}>
               {colors?.length !== 0 &&
-                colors?.map((colorObj, index) => {
-                  const { color, name } = colorObj;
+                colors?.map((color, index) => {
                   return (
-                    <Grid item key={name + index}>
+                    <Grid item key={index}>
                       <ColoredCard
-                        name={name}
                         color={color}
                         onClick={() => handleFilterTodoItems(color)}
                       />

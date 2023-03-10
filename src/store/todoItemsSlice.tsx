@@ -1,10 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { DEFAULT_PRIMARY_COLOR } from "../shared/constants";
 import { ItemProps, InitialStateProps } from "../types/todoItems.type";
 
 const initialState: InitialStateProps = {
   items: [],
   allItemsAreChecked: false,
   filtrateBy: "",
+  colorPalette: [],
 };
 
 const todoItemsSlice = createSlice({
@@ -18,7 +20,7 @@ const todoItemsSlice = createSlice({
           id: item.id,
           description: item.title,
           isChecked: false,
-          color: "#1976d2",
+          color: DEFAULT_PRIMARY_COLOR,
         };
       });
     },
@@ -70,6 +72,11 @@ const todoItemsSlice = createSlice({
     filtrateTodoItems(state, action) {
       const filter = action.payload;
       state.filtrateBy = filter;
+    },
+    updateColorFilter(state) {
+      const allColors = state.items.map((item: ItemProps) => item.color);
+      const uniqueColors = allColors.filter((e, i, a) => a.indexOf(e) == i);
+      state.colorPalette = uniqueColors;
     },
   },
 });
