@@ -1,9 +1,9 @@
 export interface colorsProps {
-  name: string;
   color: string;
+  name: string;
 }
 
 export interface ColoredCardProps {
-  color: string;
   onClick: (color: string) => void;
+  color: string;
 }

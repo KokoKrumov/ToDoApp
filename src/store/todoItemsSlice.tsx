@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { DEFAULT_PRIMARY_COLOR } from "../shared/constants";
 import { ItemProps, InitialStateProps } from "../types/todoItems.type";
+import { DEFAULT_PRIMARY_COLOR } from "../shared/constants";
 
 const initialState: InitialStateProps = {
   items: [],

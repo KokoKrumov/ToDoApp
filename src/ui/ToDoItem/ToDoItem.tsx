@@ -1,15 +1,15 @@
+import { useDispatch } from "react-redux";
+import { todoItemsActions } from "../../store/todoItemsSlice";
+import { ItemProps } from "../../types/todoItems.type";
+import styles from "./ToDoItem.module.css";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import Checkbox from "@mui/material/Checkbox";
-import ListItem from "@mui/material/ListItem";
-import IconButton from "@mui/material/IconButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
-import Divider from "@mui/material/Divider";
-import styles from "./ToDoItem.module.css";
 import ClearIcon from "@mui/icons-material/Clear";
-import { todoItemsActions } from "../../store/todoItemsSlice";
-import { useDispatch } from "react-redux";
-import { ItemProps } from "../../types/todoItems.type";
+import IconButton from "@mui/material/IconButton";
+import ListItem from "@mui/material/ListItem";
+import Checkbox from "@mui/material/Checkbox";
+import Divider from "@mui/material/Divider";
 
 const ToDoItem = ({ id, description, isChecked, color }: ItemProps) => {
   const {

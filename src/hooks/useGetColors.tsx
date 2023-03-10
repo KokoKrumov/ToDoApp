@@ -4,7 +4,6 @@ import { colorsProps } from "../types/colors.type";
 
 const useGetColors = () => {
   const [colors, setColors] = useState<colorsProps[]>();
-
   const theme = useTheme();
   const palette: {} = theme.palette;
   const extractedColors: colorsProps[] = [];

@@ -1,16 +1,16 @@
-import ListItemButton from "@mui/material/ListItemButton";
-import Grid from "@mui/material/Grid";
-import Checkbox from "@mui/material/Checkbox";
-import Typography from "@mui/material/Typography";
-import styles from "./CheckAllButton.module.css";
+import { useDispatch, useSelector } from "react-redux";
 import { todoItemsActions } from "../../store/todoItemsSlice";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
 import { TodoItemsState } from "../../types/todoItems.type";
+import ListItemButton from "@mui/material/ListItemButton";
+import styles from "./CheckAllButton.module.css";
+import Typography from "@mui/material/Typography";
+import Checkbox from "@mui/material/Checkbox";
+import Grid from "@mui/material/Grid";
 
 const CheckAllButton = () => {
   const { checkAllBox } = styles;
   const dispatch = useDispatch();
+
   const isChecked: boolean = useSelector(
     (state: TodoItemsState) => state.todoItems.allItemsAreChecked
   );

@@ -1,21 +1,21 @@
 import { useEffect, useState } from "react";
-import Menu from "@mui/material/Menu";
-import MenuItem from "@mui/material/MenuItem";
-import FilterListIcon from "@mui/icons-material/FilterList";
-import IconButton from "@mui/material/IconButton";
-import Divider from "@mui/material/Divider";
-import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Grid";
-import styles from "./FilterMenu.module.css";
-import ColoredCard from "./../ColoredCard/ColoredCard";
 import { useDispatch, useSelector } from "react-redux";
+import ColoredCard from "./../ColoredCard/ColoredCard";
 import { todoItemsActions } from "../../store/todoItemsSlice";
 import { RESOLVED, UNRESOLVED, ALL } from "../../shared/constants";
 import { ItemProps, TodoItemsSelector } from "../../types/todoItems.type";
+import styles from "./FilterMenu.module.css";
+import FilterListIcon from "@mui/icons-material/FilterList";
+import Typography from "@mui/material/Typography";
+import IconButton from "@mui/material/IconButton";
+import MenuItem from "@mui/material/MenuItem";
+import Divider from "@mui/material/Divider";
+import Grid from "@mui/material/Grid";
+import Menu from "@mui/material/Menu";
 
 const FilterMenu = () => {
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const { menuItemFixWidth } = styles;
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
   const dispatch = useDispatch();
 

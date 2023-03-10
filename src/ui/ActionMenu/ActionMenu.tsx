@@ -1,12 +1,13 @@
+import Toolbar from "@mui/material/Toolbar";
 import Card from "@mui/material/Card";
 import Grid from "@mui/material/Grid";
 import CheckAllButton from "../CheckAllButton/CheckAllButton";
 import FilterMenu from "./../FilterMenu/FilterMenu";
-import Toolbar from "@mui/material/Toolbar";
 import styles from "./ActionMenu.module.css";
 
 const ActionMenu = () => {
   const { actionMenuCard, actionMenuToolbar } = styles;
+
   return (
     <Card className={actionMenuCard}>
       <Toolbar disableGutters className={actionMenuToolbar}>

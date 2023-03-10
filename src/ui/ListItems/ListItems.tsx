@@ -1,10 +1,9 @@
-import List from "@mui/material/List";
-import ToDoItem from "../ToDoItem/ToDoItem";
-
 import { useSelector } from "react-redux";
+import ToDoItem from "../ToDoItem/ToDoItem";
 import { ItemProps, TodoItemsSelector } from "../../types/todoItems.type";
 import { filterItemsBy } from "../../shared/utils/filters";
 import { ALL } from "../../shared/constants";
+import List from "@mui/material/List";
 
 const ListItems = () => {
   const items: ItemProps[] = useSelector((state: TodoItemsSelector) => {

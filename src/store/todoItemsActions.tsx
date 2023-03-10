@@ -1,5 +1,5 @@
-import { todoItemsActions } from "./todoItemsSlice";
 import { Dispatch } from "redux";
+import { todoItemsActions } from "./todoItemsSlice";
 
 export const fetchTodoItems = () => {
   return async (dispatch: Dispatch) => {

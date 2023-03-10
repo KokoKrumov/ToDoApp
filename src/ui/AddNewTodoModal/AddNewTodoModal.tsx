@@ -1,4 +1,12 @@
+import { useState } from "react";
+import { useDispatch } from "react-redux";
 import useGetColors from "../../hooks/useGetColors";
+import { todoItemsActions } from "../../store/todoItemsSlice";
+import { AddNewTodoModalProps } from "../../types/modal.type";
+import { ItemProps } from "../../types/todoItems.type";
+import ColoredCard from "../ColoredCard/ColoredCard";
+import { DEFAULT_PRIMARY_COLOR } from "../../shared/constants";
+import styles from "./AddNewTodoModal.module.css";
 import {
   Button,
   DialogActions,
@@ -10,14 +18,6 @@ import {
   Grid,
   Divider,
 } from "@mui/material";
-import ColoredCard from "../ColoredCard/ColoredCard";
-import { useDispatch } from "react-redux";
-import { todoItemsActions } from "../../store/todoItemsSlice";
-import { useState } from "react";
-import styles from "./AddNewTodoModal.module.css";
-import { AddNewTodoModalProps } from "../../types/modal.type";
-import { ItemProps } from "../../types/todoItems.type";
-import { DEFAULT_PRIMARY_COLOR } from "../../shared/constants";
 
 const AddNewTodoModal = ({ open, handleClose }: AddNewTodoModalProps) => {
   const todoItemInit = {

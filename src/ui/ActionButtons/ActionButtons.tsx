@@ -1,8 +1,7 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Button, Grid } from "@mui/material";
 import AddNewTodoModal from "../AddNewTodoModal/AddNewTodoModal";
-
-import { useDispatch } from "react-redux";
 import { todoItemsActions } from "../../store/todoItemsSlice";
 
 const ActionButtons = () => {
