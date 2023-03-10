@@ -21,7 +21,7 @@ const ListItems = () => {
 
   const generateFilterLabel = () => {
     const colorExist = colors?.find((color) => color.color === filter);
-    console.log("colorExist: ", colorExist);
+
     if (colorExist) {
       return `${colorExist.name} color`;
     }
