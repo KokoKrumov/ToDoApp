@@ -1,0 +1,19 @@
+li.todoItemDivider{
+    margin-bottom: 20px;
+}
+
+.todoListItemText span{
+    font-size: 18px;
+}
+
+.todoItemIsChecked .todoListItemText span{
+    color: rgba(0, 0, 0, 0.45);
+    text-decoration: line-through
+}
+
+span.todoItemColoredDivider {
+    width: 10px;
+    margin-right: -10px;
+    border: none;
+}
+
