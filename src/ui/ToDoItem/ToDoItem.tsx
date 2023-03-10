@@ -21,11 +21,11 @@ const ToDoItem = ({ id, description, isChecked, color }: ItemProps) => {
   const labelId = `checkbox-list-secondary-label-${id}`;
   const dispatch = useDispatch();
 
-  const handleToggle = (id: number) => () => {
+  const handleToggle = (id: number | undefined) => () => {
     dispatch(todoItemsActions.toggleTodoItem(id));
   };
 
-  const handleRemoveTodoItem = (id: number) => {
+  const handleRemoveTodoItem = (id: number | undefined) => {
     dispatch(todoItemsActions.removeTodoItem(id));
   };
 
