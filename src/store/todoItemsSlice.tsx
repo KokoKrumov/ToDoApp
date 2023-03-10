@@ -91,6 +91,9 @@ const todoItemsSlice = createSlice({
           } else {
             return item;
           }
+        } else if (state.filtrateBy === item.color) {
+          state.allItemsAreChecked = isChecked;
+          return (item = { ...item, isChecked: isChecked });
         } else {
           return item;
         }

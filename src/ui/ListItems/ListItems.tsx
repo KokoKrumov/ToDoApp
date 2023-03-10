@@ -8,7 +8,7 @@ import useGetColors from "./../../hooks/useGetColors";
 
 const ListItems = () => {
   const colors = useGetColors();
-  console.log("colors: ", colors);
+
   const items: ItemProps[] = useSelector((state: TodoItemsSelector) => {
     return state.todoItems.items;
   });
