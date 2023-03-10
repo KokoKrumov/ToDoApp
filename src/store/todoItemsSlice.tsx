@@ -1,12 +1,19 @@
 import { createSlice } from "@reduxjs/toolkit";
 import { ItemProps, InitialStateProps } from "../types/todoItems.type";
-import { DEFAULT_PRIMARY_COLOR } from "../shared/constants";
+import { filterItemsBy } from "./../shared/utils/filters";
+import {
+  ALL,
+  DEFAULT_PRIMARY_COLOR,
+  RESOLVED,
+  UNRESOLVED,
+} from "../shared/constants";
 
 const initialState: InitialStateProps = {
   items: [],
   allItemsAreChecked: false,
-  filtrateBy: "",
+  filtrateBy: ALL,
   colorPalette: [],
+  filtratedItems: [],
 };
 
 const todoItemsSlice = createSlice({
@@ -56,6 +63,7 @@ const todoItemsSlice = createSlice({
         }
       });
       const allTodoItemsAreSelected = state.items.every((el) => el.isChecked);
+      console.log("allTodoItemsAreSelected: ", allTodoItemsAreSelected);
       if (allTodoItemsAreSelected) {
         state.allItemsAreChecked = true;
       } else {
@@ -64,14 +72,32 @@ const todoItemsSlice = createSlice({
     },
     toggleAllTodoItems(state, action) {
       const isChecked = action.payload;
+
       state.items = state.items.map((item: ItemProps) => {
-        return (item = { ...item, isChecked: isChecked });
+        if (state.filtrateBy === ALL) {
+          state.allItemsAreChecked = isChecked;
+          return (item = { ...item, isChecked: isChecked });
+        } else if (state.filtrateBy === RESOLVED) {
+          if (item.isChecked === true) {
+            state.allItemsAreChecked = isChecked;
+            return (item = { ...item, isChecked: isChecked });
+          } else {
+            return item;
+          }
+        } else if (state.filtrateBy === UNRESOLVED) {
+          if (item.isChecked === false) {
+            state.allItemsAreChecked = isChecked;
+            return (item = { ...item, isChecked: isChecked });
+          } else {
+            return item;
+          }
+        } else {
+          return item;
+        }
       });
-      state.allItemsAreChecked = isChecked;
     },
     filtrateTodoItems(state, action) {
-      const filter = action.payload;
-      state.filtrateBy = filter;
+      state.filtrateBy = action.payload;
     },
     updateColorFilter(state) {
       const allColors = state.items.map((item: ItemProps) => item.color);

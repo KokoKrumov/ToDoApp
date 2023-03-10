@@ -30,7 +30,7 @@ const CheckAllButton = () => {
           />
         </Grid>
         <Grid item>
-          <Typography variant="h6">Mark all as done</Typography>
+          <Typography variant="h6">Check / Uncheck items</Typography>
         </Grid>
       </Grid>
     </ListItemButton>
