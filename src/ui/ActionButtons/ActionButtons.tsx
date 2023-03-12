@@ -14,8 +14,22 @@ const ActionButtons = () => {
     dispatch(todoItemsActions.removeAllTodoItems());
   };
 
+  const generateNewList = () => {
+    dispatch(todoItemsActions.generateNewList());
+  };
+
   return (
     <Grid container spacing={2} justifyContent="flex-end">
+      <Grid item>
+        <Button
+          variant="contained"
+          color="info"
+          disabled={false}
+          onClick={generateNewList}
+        >
+          Generate new list
+        </Button>
+      </Grid>
       <Grid item>
         <Button
           variant="outlined"

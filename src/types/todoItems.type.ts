@@ -5,7 +5,7 @@ export interface filterTodoItemsProps {
 
 export interface InitialStateProps {
   allItemsAreChecked: boolean;
-  filtratedItems: ItemProps[];
+  allReceivingItems: ItemProps[];
   colorPalette: string[];
   filtrateBy: string;
   items: ItemProps[];

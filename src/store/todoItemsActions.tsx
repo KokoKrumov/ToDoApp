@@ -14,7 +14,7 @@ export const fetchTodoItems = () => {
 
       const data = await response.json();
 
-      return data.slice(0, 5);
+      return data;
     };
 
     try {

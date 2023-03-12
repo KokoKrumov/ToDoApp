@@ -7,13 +7,14 @@ import {
   RESOLVED,
   UNRESOLVED,
 } from "../shared/constants";
+import { randomNumber } from "../shared/utils/randomNumber";
 
 const initialState: InitialStateProps = {
+  allReceivingItems: [],
   items: [],
   allItemsAreChecked: false,
   filtrateBy: ALL,
   colorPalette: [],
-  filtratedItems: [],
 };
 
 const todoItemsSlice = createSlice({
@@ -22,15 +23,26 @@ const todoItemsSlice = createSlice({
   reducers: {
     replaceList(state, action) {
       const newItems = action.payload;
-      state.items = newItems.map((item: { title: string; id: number }) => {
-        return {
-          id: item.id,
-          description: item.title,
-          isChecked: false,
-          color: DEFAULT_PRIMARY_COLOR,
-        };
-      });
+
+      state.allReceivingItems = newItems.map(
+        (item: { title: string; id: number }) => {
+          return {
+            id: item.id,
+            description: item.title,
+            isChecked: false,
+            color: DEFAULT_PRIMARY_COLOR,
+          };
+        }
+      );
+      state.items = state.allReceivingItems.slice(0, 5);
     },
+
+    generateNewList(state) {
+      const number = randomNumber();
+      const startNumber = number();
+      state.items = state.allReceivingItems.slice(startNumber, startNumber + 5);
+    },
+
     addTodoItem(state, action) {
       const newItem: ItemProps = action.payload;
 
