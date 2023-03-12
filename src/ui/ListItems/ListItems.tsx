@@ -1,10 +1,13 @@
 import { useSelector } from "react-redux";
 import ToDoItem from "../ToDoItem/ToDoItem";
 import { ItemProps, TodoItemsSelector } from "../../types/todoItems.type";
+import { colorsMapProps } from "../../types/colors.type";
 import { filterItemsBy } from "../../shared/utils/filters";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
 import useGetColors from "./../../hooks/useGetColors";
+import { colorsMap } from "../../shared/constants";
+import { colors } from "./../../../.history/src/shared/constants_20230312130358";
 
 const ListItems = () => {
   const colors = useGetColors();
@@ -23,7 +26,11 @@ const ListItems = () => {
     const colorExist = colors?.find((color) => color.color === filter);
 
     if (colorExist) {
-      return `${colorExist.name} color`;
+      const selectedColor = colorExist.name;
+      // @ts-ignore: Unreachable code error
+      const colorName = colorsMap[selectedColor];
+
+      return `${colorName} color`;
     }
 
     return filter;

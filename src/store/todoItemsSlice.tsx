@@ -74,8 +74,9 @@ const todoItemsSlice = createSlice({
           item.isChecked = !item.isChecked;
         }
       });
+
       const allTodoItemsAreSelected = state.items.every((el) => el.isChecked);
-      console.log("allTodoItemsAreSelected: ", allTodoItemsAreSelected);
+
       if (allTodoItemsAreSelected) {
         state.allItemsAreChecked = true;
       } else {
