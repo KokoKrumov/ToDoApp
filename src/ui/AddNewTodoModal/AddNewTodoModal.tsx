@@ -5,6 +5,7 @@ import { todoItemsActions } from "../../store/todoItemsSlice";
 import { AddNewTodoModalProps } from "../../types/modal.type";
 import { ItemProps } from "../../types/todoItems.type";
 import ColoredCard from "../ColoredCard/ColoredCard";
+import { checkInputFields } from "../../shared/utils/checkInputFields";
 import { DEFAULT_PRIMARY_COLOR } from "../../shared/constants";
 import styles from "./AddNewTodoModal.module.css";
 import {
@@ -26,30 +27,35 @@ const AddNewTodoModal = ({ open, handleClose }: AddNewTodoModalProps) => {
     color: DEFAULT_PRIMARY_COLOR,
   };
   const [todoItem, setTodoItem] = useState<ItemProps>(todoItemInit);
-  const [isNotTodoItemValid, setIsNotTodoItemValid] = useState<boolean>();
+  const [enteredTextIsValid, setEnteredTextIsValid] = useState(false);
+  const [isTouched, setIsTouched] = useState(false);
+  const todoItemIsInvalid = !enteredTextIsValid && isTouched;
 
   const { todoItemColoredDivider } = styles;
   const colors = useGetColors();
   const dispatch = useDispatch();
 
-  const addNewItem = () => {
-    if (todoItem.description.length !== 0) {
-      dispatch(todoItemsActions.addTodoItem(todoItem));
-      handleCloseModal();
-    } else {
-      setIsNotTodoItemValid(true);
+  const submitNewTodoItem = () => {
+    setIsTouched(true);
+
+    if (todoItem.description === "") {
+      setEnteredTextIsValid(false);
+      return;
     }
+    setEnteredTextIsValid(true);
+    dispatch(todoItemsActions.addTodoItem(todoItem));
+    handleCloseModal();
   };
 
-  const handleTodoDescription = (
+  const handleTodoDescriptionOnChange = (
     e: React.ChangeEvent<HTMLInputElement>
   ): void => {
-    if (e.target.value.length !== 0) {
-      setIsNotTodoItemValid(false);
-    }
+    const value: string = e.target.value.trim();
+    const isValid: boolean = checkInputFields(value);
+    setEnteredTextIsValid(isValid);
     setTodoItem({
       ...todoItem,
-      description: e.target.value,
+      description: value,
     });
   };
 
@@ -61,8 +67,9 @@ const AddNewTodoModal = ({ open, handleClose }: AddNewTodoModalProps) => {
   };
 
   const handleCloseModal = () => {
-    setTodoItem(todoItemInit);
     handleClose();
+    setIsTouched(false);
+    setTodoItem(todoItemInit);
   };
 
   return (
@@ -94,9 +101,9 @@ const AddNewTodoModal = ({ open, handleClose }: AddNewTodoModalProps) => {
               type="text"
               fullWidth
               variant="standard"
-              error={isNotTodoItemValid}
-              helperText={isNotTodoItemValid ? "Incorrect entry." : ""}
-              onChange={handleTodoDescription}
+              error={todoItemIsInvalid}
+              helperText={todoItemIsInvalid ? "Incorrect entry." : ""}
+              onChange={handleTodoDescriptionOnChange}
             />
           </Grid>
         </Grid>
@@ -118,7 +125,7 @@ const AddNewTodoModal = ({ open, handleClose }: AddNewTodoModalProps) => {
         </Grid>
       </DialogContent>
       <DialogActions>
-        <Button variant="contained" color="success" onClick={addNewItem}>
+        <Button variant="contained" color="success" onClick={submitNewTodoItem}>
           Save
         </Button>
       </DialogActions>
